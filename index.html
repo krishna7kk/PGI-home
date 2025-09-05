@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Green Inertia Pvt Ltd</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+
+    <style>
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #3CB371;
+            --dark-green: #1a5632;
+            --accent-green: #90EE90;
+            --text-dark: #333;
+            --text-light: #fff;
+            --gray-bg: #f9f9f9;
+            --menu-bg: #e6f4ea;
+            --menu-shadow: 0 4px 16px rgba(46, 139, 87, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            z-index: 1001;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-menu li {
+            position: relative;
+            margin: 0 5px;
+        }
+        
+        .nav-menu > li > a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            padding: 12px 15px;
+            border-radius: 6px;
+            display: block;
+        }
+        
+        .nav-menu > li > a:hover {
+            color: var(--primary-green);
+            background: rgba(46, 139, 87, 0.08);
+        }
+        
+        .nav-menu > li > a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 8px;
+            left: 15px;
+            background-color: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu > li > a:hover::before {
+            width: calc(100% - 30px);
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+            color: white;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(46, 139, 87, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .highlight:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(46, 139, 87, 0.4);
+        }
+        
+        .highlight:hover::before {
+            left: 100%;
+        }
+        
+        .highlight:nth-child(2) {
+            background: linear-gradient(135deg, #FF8C00, #FFA500);
+            box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
+        }
+        
+        .highlight:nth-child(2):hover {
+            box-shadow: 0 6px 15px rgba(255, 140, 0, 0.4);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            background: var(--primary-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--menu-bg);
+            min-width: 220px;
+            padding: 10px 0;
+            border-radius: 8px;
+            box-shadow: var(--menu-shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .dropdown-content li {
+            margin: 0;
+        }
+        
+        .dropdown-content a {
+            padding: 12px 20px;
+            display: block;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-content a:hover {
+            background: rgba(46, 139, 87, 0.1);
+            color: var(--primary-green);
+            padding-left: 25px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("images/p10.jpg");
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--primary-green);
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin: 20px;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .stat-text {
+            font-size: 1.2rem;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-green);
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-green);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Founder Section */
+        .founder {
+            padding: 80px 0;
+            background-color: var(--gray-bg);
+        }
+        
+        .founder-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .founder-image {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .founder-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .founder-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .founder-name {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+        
+        /* MOU Section */
+        .mou {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .mou-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .mou-logo {
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .mou-logo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(46, 139, 87, 0.3);
+        }
+        
+        .mou-logo img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+        
+        .mou-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: var(--menu-bg);
+            min-width: 200px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: var(--menu-shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10;
+            text-align: center;
+            color: var(--text-dark);
+        }
+        
+        .mou-logo:hover .mou-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(5px);
+        }
+        
+        .mou-dropdown h4 {
+            color: var(--primary-green);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .mou-dropdown p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .mou-dropdown a {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .mou-dropdown a:hover {
+            background-color: var(--dark-green);
+        }
+        
+        /* Moto Section */
+        .moto {
+            padding: 80px 0;
+            background: linear-gradient(to right, var(--primary-green), var(--light-green));
+            color: white;
+            text-align: center;
+        }
+        
+        .moto-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .moto-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .moto-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: var(--gray-bg);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            background-color: var(--primary-green);
+            color: white;
+            font-size: 2rem;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .service-content {
+            padding: 20px;
+        }
+        
+        .service-content h3 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-green);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p, .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column a {
+            color: var(--accent-green);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary-green);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                background-color: var(--menu-bg);
+                width: 280px;
+                height: 100vh;
+                flex-direction: column;
+                padding: 80px 20px 30px;
+                box-shadow: var(--menu-shadow);
+                transition: right 0.4s ease;
+                overflow-y: auto;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .nav-menu > li > a {
+                padding: 15px;
+                border-radius: 6px;
+                margin-bottom: 5px;
+            }
+            
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(46, 139, 87, 0.05);
+                margin-left: 15px;
+                margin-top: 5px;
+                display: none;
+            }
+            
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                height: 60vh;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .stat-item {
+                min-width: 150px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .mou-logo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .mou-dropdown {
+                min-width: 180px;
+                font-size: 0.8rem;
+            }
+            
+            .mou-dropdown h4 {
+                font-size: 1rem;
+            }
+            
+            .mou-dropdown a {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="images/logo.png">
+                <div class="logo-text">Plant Green Inertia Pvt Ltd.</div>
+            </div>
+            
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+         
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="https://plantgreeninertia.github.io/DM/">Digital Marketing Course</a></li>
+                <li><a href="https://plantgreen.github.io/Just/">Just ₹99</a></li>
+
+                <li class="dropdown">
+                    <a href="#">Programs <i class="fas fa-chevron-down" style="font-size: 12px;"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="https://plantgreeninertia.github.io/intern/">Internships</a></li>
+                        <li><a href="https://plantgreeninertia.github.io/corporate/">Corporate Collab</a></li>
+                        <li><a href="https://plantgreen.github.io/er/">Start your career at PGI</a></li>
+                        <li><a href="https://plantgreeninertia.github.io/TTT/">Train The Trainer</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://www.plantgreeninertia.com/contact-us">Contact Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Upskilling For A Brighter Future</h1>
+            <p>Join India's leading training organization with 200,000+ students trained and 25+ MOU's with prestigious institutions</p>
+            <a href="#" class="btn">Explore Our Courses</a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container stats-container">
+            <div class="stat-item">
+                <div class="stat-number">200,0000+</div>
+                <div class="stat-text">Students Trained</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">25+</div>
+                <div class="stat-text">MOU's Signed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">110+</div>
+                <div class="stat-text">Private Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5+</div>
+                <div class="stat-text">Government Projects</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">About Our Organization</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Plant Green Inertia Pvt Ltd is a leading training organization dedicated to upskilling students and professionals for the digital age. Founded with a vision to bridge the gap between academia and industry requirements, we provide cutting-edge training programs that empower individuals to excel in their careers.</p>
+                    <p>Our unique approach combines theoretical knowledge with practical implementation, ensuring our students are job-ready from day one. With our extensive network of industry partners and academic collaborations, we create unparalleled opportunities for growth and development.</p>
+                    <a href="#" class="btn" style="margin-top: 20px;">Learn More About Us</a>
+                </div>
+                <div class="about-image">
+                    <img src="images/p14.jpg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="founder">
+        <div class="container">
+            <h2 class="section-title">Our Founder</h2>
+            <div class="founder-content">
+                <div class="founder-image">
+                    <img src="images/image0.jpeg.jpg">
+                </div>
+                <div class="founder-text">
+                    <h3 class="founder-name">Mr. Laven Lokesh Barani</h3>
+                    <p>Mr. Laven Lokesh Barani is a world-class trainer with over seven years of experience since 2017. A fitness enthusiast, he began his entrepreneurial journey in 2015 by manufacturing and selling gym equipment, which he paused in 2017 to focus on training and mentoring entrepreneurs and college students.</p>
+                    <p>Starting his career at the Rural Self Employment Training Institute (RSETI) in 2017, Mr. Lokesh worked closely with small-scale entrepreneurs and business owners. On November 13, 2017, he founded his own training company, offering one-on-one mentorship to students and entrepreneurs.</p>
+                    <p>In 2018, he launched an e-commerce store on Amazon with Dopamin Chocolates, a premium handmade chocolate brand. Alongside, he honed his oratory skills through active participation in Toastmasters Club and Karuna International.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOU Section -->
+    <section class="mou">
+        <div class="container">
+            <h2 class="section-title">Our Collaborations</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">We are proud to partner with prestigious educational institutions to deliver quality training programs and create skilled professionals for the future.</p>
+            
+            <div class="mou-logos">
+                <div class="mou-logo">
+                    <img src="images/srm.jpg" alt="SRM Ramapuram">
+                    <div class="mou-dropdown">
+                        <h4>SRM Ramapuram</h4>
+                        <p>Collaborating since 2020 to provide advanced digital marketing and entrepreneurship programs.</p>
+                        <a href="https://www.srmist.edu.in/" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                <div class="mou-logo">
+                    <img src="images/mgr.jpg" alt="MGR College">
+                    <div class="mou-dropdown">
+                        <h4>Dr. MGR College</h4>
+                        <p>Partnered to offer skill development workshops and internship opportunities.</p>
+                        <a href="https://www.drmgrdu.ac.in/" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                <div class="mou-logo">
+                    <img src="images/thiruthangal.jpg" alt="Annai College">
+                    <div class="mou-dropdown">
+                        <h4>Thiruthangal Nadar College</h4>
+                        <p>Joint programs for career-oriented training in technology and management.</p>
+                        <a href="https://www.thiruthangalnadarcollege.edu.in/" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                <div class="mou-logo">
+                    <img src="images/st.joseph.jpg" alt="St.Joseph College">
+                    <div class="mou-dropdown">
+                        <h4>St. Joseph College</h4>
+                        <p>Offering specialized courses to enhance employability and industry readiness.</p>
+                        <a href="https://www.stjosephscollege.ac.in/" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                <div class="mou-logo">
+                    <img src="images/Velammal.jpg" alt="Partner 5">
+                    <div class="mou-dropdown">
+                        <h4>Velammal Institute Of Technology</h4>
+                        <p>Collaborating to foster innovation and skill development for students.</p>
+                        <a href="https://velammalitech.edu.in/" target="_blank">Visit Website</a>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Moto Section -->
+    <section class="moto">
+        <div class="container moto-content">
+            <h2>Our Mission</h2>
+            <p>To empower individuals with industry-relevant skills through innovative training methodologies, creating a workforce that's prepared for the challenges of tomorrow. We believe in learning by doing, and our programs are designed to provide hands-on experience that translates directly to workplace success.</p>
+            <a href="https://plantgreen.github.io/er/" class="btn">Join Our Mission</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Our Programs</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-digital-tachograph"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Digital Marketing Course</h3>
+                        <p>Master the art of digital marketing with our comprehensive course covering SEO, SEM, Social Media Marketing, and more.</p>
+                        <a href="https://plantgreeninertia.github.io/DM/" class="btn" style="padding: 8px 20px; margin-top: 15px;">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Internships</h3>
+                        <p>Gain real-world experience with our internship programs that connect you with industry leaders and projects.</p>
+                        <a href="https://plantgreeninertia.github.io/intern/" class="btn" style="padding: 8px 20px; margin-top: 15px;">Apply Now</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Corporate Collaboration</h3>
+                        <p>Partner with us to upskill your workforce and stay ahead in the rapidly evolving digital landscape.</p>
+                        <a href="https://plantgreeninertia.github.io/corporate/" class="btn" style="padding: 8px 20px; margin-top: 15px;">Collaborate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Plant Green Inertia</h3>
+                    <p>Leading the way in innovative education and skill development for the digital age.</p>
+                    <div class="social-icons">
+                        <a href="https://api.whatsapp.com/send/?phone=9345029705&text&type=phone_number&app_absent=0"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.youtube.com/@plantgreeninertia"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/plantgreeninertia/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/plantgreeninertia/posts/?feedView=all"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="https://plantgreeninertia.github.io/DM/">Digital Marketing Course</a></li>
+                        <li><a href="https://plantgreeninertia.github.io/intern/">Internships</a></li>
+                        <li><a href="https://plantgreeninertia.github.io/corporate/">Corporate Collab</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i>        Office No. 10, 2nd floor, City Centre Plaza, No. 7/3, Mount Road, Anna Salai, Triplicane, Chennai, Tamil Nadu 600002</p>
+                    <p><i class="fas fa-phone"></i> +91 93450 29705, +91 93458 86690</p>
+                    <p><i class="fas fa-envelope"></i>     trainings.pgi@gmail.com , plantgreeninertia@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Plant Green Inertia Pvt Ltd. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+        
+        // Simple animation for stats counter
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString() + '+';
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        // Animate stats when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statItems = document.querySelectorAll('.stat-number');
+                    animateValue(statItems[0], 0, 200000, 2000);
+                    animateValue(statItems[1], 0, 25, 2000);
+                    animateValue(statItems[2], 0, 110, 2000);
+                    animateValue(statItems[3], 0, 5, 2000);
+                    observer.disconnect();
+                }
+            });
+        }, {threshold: 0.5});
+        
+        observer.observe(document.querySelector('.stats'));
+    </script>
+</body>
+</html>
